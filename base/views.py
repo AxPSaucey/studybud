@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -80,3 +81,15 @@ def deleteRoom(request, pk):
         return redirect('home')
 
     return render(request, 'base/delete.html', {'obj':room})
+=======
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+
+def home(request):
+    return HttpResponse('HomePage')
+
+def room(request):
+        return HttpResponse('ROOM')
+>>>>>>> fbf65462f91a4a7d3dbe00424ced142d18d18fd8
