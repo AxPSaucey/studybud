@@ -1,7 +1,8 @@
-<<<<<<< HEAD
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from .models import Room, Topic
 from .forms import RoomForm
 
@@ -19,14 +20,26 @@ def loginPage(request):
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        # try:
-        #     user = User.objects.get(username=username)
-        # except:
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, 'User does not exist')
 
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, 'Username or Password does not exist')
 
     context = {}
 
     return render(request, 'base/login_register.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -81,15 +94,3 @@ def deleteRoom(request, pk):
         return redirect('home')
 
     return render(request, 'base/delete.html', {'obj':room})
-=======
-from django.shortcuts import render
-from django.http import HttpResponse
-
-# Create your views here.
-
-def home(request):
-    return HttpResponse('HomePage')
-
-def room(request):
-        return HttpResponse('ROOM')
->>>>>>> fbf65462f91a4a7d3dbe00424ced142d18d18fd8
