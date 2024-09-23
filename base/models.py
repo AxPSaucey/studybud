@@ -1,5 +1,4 @@
 from django.db import models
-<<<<<<< HEAD
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -34,7 +33,3 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
-=======
-
-# Create your models here.
->>>>>>> fbf65462f91a4a7d3dbe00424ced142d18d18fd8
